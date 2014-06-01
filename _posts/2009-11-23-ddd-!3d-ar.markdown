@@ -1,0 +1,62 @@
+---
+layout: post
+title: "DDD != AR"
+date: 2009-11-23 22:12:00
+comments: true
+categories: 
+---
+
+<p>I have been struggling with many aspects of OO development over last couple of years, all in an effort to improve my software.&nbsp; I have, along with others, been trapped in the DDD Aggregate Root thinking that appears to be everywhere.&nbsp; It appears as though there is this opinion that ARs are the centre of the universe and I have come to the conclusion that it must have something to do with the <strong><em>consistency boundary</em></strong> afforded by an AR.&nbsp; This seems to have become the central theme.&nbsp; Almost as though it became necessary to <em>define</em> DDD in some structural sense.</p>
+<p>So, all-in-all, the idea that an the AR changes from use-case to use-case is not true.&nbsp; The consistency boundary does, however, change.&nbsp; What contributed to my thinking seems to be the fact that everyone thinks that the only object that may be loaded by a Repository is an AR.&nbsp; This too is a fallacy.</p>
+<p><em>Any entity <strong>may </strong>be loaded from a Repository</em>.</p>
+<h3>So what is an Aggregate Root?</h3>
+<p>The aggregate concept is not new.&nbsp; The classic Order-&gt;OrderLine example comes to mind.&nbsp; An OrderLine has no reason to exist without it's Order.&nbsp;&nbsp;&nbsp; However, people tend to confuse ownership with aggregation.&nbsp; I know I have.&nbsp; One may manipulate an Order directly, even though it belongs to a Customer.&nbsp; One would never manipulate an OrderLine directly.&nbsp; So an AR boils down to how you manipulate your objects.&nbsp; The consistency is a side effect since an AR only makes sense as a whole in the same way a class only makes sense as a whole.&nbsp; Both should remain consistent.</p>
+<p>So to manipulate an aggregate we nominate an entity within the aggregate to represent the aggregate.&nbsp; This becomes the <em>Aggregate Root</em>.</p>
+<p>But in many, if not most, cases this entity is only the representative.&nbsp; Using Eric Evans' example in his 'What I learned...' presentation: an aggregate consisting of a Stem and a collection of Grape objects may have, as the root, the Stem class.&nbsp; But this does not <em>really</em> represent the GrapeBunch aggregate properly.&nbsp; In some instances one may probably want a GrapeBunch class and use composition to get to the aggregate.&nbsp; Mr. Evans mentions that he has no real issue with doing this.&nbsp; However, I feel too many aggregates end up as abstract concepts in the domain.&nbsp; It may be that the defined Ubiquitous Language has missed the concept or that the domain experts even missed the aggregation themselves.</p>
+<h3>Aneamic Use-Case Model</h3>
+<p>It is my opinion that use-cases (or user stories, or whatever you want to call them) may not receive the necessary attention in our modelling.&nbsp; Well, mine anyway.&nbsp; I have been using a 'Tasks' layer but have been trying to move these into my entities and ARs.&nbsp; This may have been a mistake.</p>
+<p>I will be mentioning bits from <a href="http://en.wikipedia.org/wiki/Use_case" target="_blank">the use case</a> and <a href="http://en.wikipedia.org/wiki/Sequence_diagram">sequence diagram</a> Wikipedia articles.</p>
+<p>Firstly, we need to see where a use-case fits in.&nbsp; There are essentially two kinds of 'workflows' in any system: sequential and a state-machine.</p>
+<p>Now looking at what a sequence diagram does:</p>
+<p style="padding-left: 30px;">"A sequence diagram shows, as parallel vertical lines ("lifelines"), different processes or objects that live simultaneously, and, as horizontal arrows, the messages exchanged between them, in the order in which they occur. This allows the specification of simple runtime scenarios in a graphical manner."</p>
+<p>And what a use-case is:</p>
+<ul>
+<li>"Each use case focuses on describing how to achieve a goal or task."</li>
+</ul>
+<ul>
+<li>"Use cases should not be confused with the features of the system under consideration."</li>
+</ul>
+<ul>
+<li>"A use case defines the interactions between external actors and the system under consideration to accomplish a goal."</li>
+</ul>
+<p>A use-case appears to fit the idea of a sequential workflow.&nbsp; It is completed in one step.&nbsp; So we can call it an <em>operation</em>.&nbsp; This <em>operation</em> takes place in response to a command from an actor in the system.&nbsp; If may then publish an event.&nbsp; These operations resemble <em>transaction script</em> [PoEAA] and may be why some folks choose to stay away from them since it is confused with an aneamic domain model.&nbsp; However, they are, in sooth, <em>operation script</em> (also Fowler).&nbsp; Now, I have been defining a 'Task' for my operations but since moving to DDD-thinking I have been trying to move these into my domain classes.&nbsp; It isn't working.&nbsp; I feel that use-cases need to be made explicit also.&nbsp; They lie in-between task-based domain interaction and state-machines.&nbsp; The other thing is that one operation may need to interact with another.</p>
+<h3>State Machines<br /></h3>
+<p>The term <em>workflow</em> is most often associated with a state machine.&nbsp; The <a href="http://en.wikipedia.org/wiki/State_machine">finite state machine</a> article on Wikipedia may be referenced for more information.</p>
+<p>Workflow does not fit into the typical use-case definition and it is probably the reason why the term <em>process </em>is used quite often in business requirements documentation.</p>
+<h3>Conclusion</h3>
+<p>What I find interesting is that in any business domain of reasonable complexity one will find all these concepts hidden away.&nbsp; Developing a computer-based solution that takes all of these factors into consideration is a monumental effort and in many cases is under-estimated.&nbsp; What I have seen over the years appears to be a tendency to focus on specific technologies to <em>try</em> overcome this intricate mass.&nbsp; Software such as BizTalk has been abused.</p>
+<p>At the root of everything, though, is data.&nbsp; We need data to represent the real world state.&nbsp; This leads to a group of developers relying only on data manipulation to perform <em>all</em> these specialized areas.&nbsp; But everything is built up from the data, so (bold is good):</p>
+<ul>
+<li><strong>Data Structures </strong>
+<ul>
+<li>Data Manipulation (Procedural Code / Transaction Script)</li>
+<li><strong>Behaviour (OO Code) </strong>
+<ul>
+<li>Entity-Based Interaction</li>
+<li><strong>Task-Based Interaction </strong>
+<ul>
+<li><em><strong>Use-Case Modeling (Operation Script) </strong></em>
+<ul>
+<li><em><strong>State Machines (Workflow / Saga)</strong></em></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>And to top it all off we will add Service-Orientation.&nbsp; SOA would wrap all of these.</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>

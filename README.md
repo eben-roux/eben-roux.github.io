@@ -1,4 +1,4 @@
 eben-roux.github.io
 ===================
 
-Blog
+My personal blog.
