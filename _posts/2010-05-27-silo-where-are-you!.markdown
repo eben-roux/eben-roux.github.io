@@ -1,6 +1,6 @@
 ---
 layout: post
-title: ""Silo, where are you!""
+title: "Silo, where are you!"
 date: 2010-05-27 00:19:00
 comments: true
 categories: 
