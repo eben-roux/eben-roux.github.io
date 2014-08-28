@@ -4,17 +4,21 @@ title: "Silo, where are you!"
 date: 2010-05-27 00:19:00
 comments: true
 categories: 
+- opinion
+tags:
+- domain driven design
+- bounded context
 ---
 
-I just read <a href="http://www.zdnet.com/blog/service-oriented/silos-for-lack-of-a-better-word-are-good/4909?tag=nl.e539">an interesting article</a>.
+I just read [an interesting article](http://www.zdnet.com/blog/service-oriented/silos-for-lack-of-a-better-word-are-good/4909?tag=nl.e539).
 
 The reason I say it is interesting is that silos have been denounced for quite some time now, and they should be. Yet, here is someone that appears to be a proponent thereof:
 
-<p style="padding-left: 30px;">_"**Silos **are the only way to manage increasingly complex concepts"
+> "**Silos** are the only way to manage increasingly complex concepts"
 
-Almost well said. I would paraphrase and say:
+I would paraphrase and say:
 
-<p style="padding-left: 30px;">"**_Bounded Contexts** _are the only way to manage increasingly complex concepts"
+> "**Bounded Contexts** are the only way to manage increasingly complex concepts"
 
 But bounded contexts do not solve complexity on their own. You definitely need a sprinkling of communication between them. A lack of communication is what leads to silos. Communication is a broad term but in this sense is simply means we need a publish / subscribe mechanism between the bounded contexts so that relevant parties are notified when a particularly interesting **event **takes place.
 

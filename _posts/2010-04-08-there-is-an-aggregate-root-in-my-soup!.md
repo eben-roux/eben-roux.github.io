@@ -3,10 +3,13 @@ layout: post
 title: "There is an aggregate root in my soup!"
 date: 2010-04-08 01:01:00
 comments: true
-categories: 
+categories:
+- domain driven design
+tags:
+- aggregate root
 ---
 
-So there is <a href="http://tech.groups.yahoo.com/group/domaindrivendesign/message/17972">another discussion</a> around value objects and repositories on the domain driven design yahoo group. In this case it revolves around a the definition of a **Country**.
+So there was yet [another discussion](http://tech.groups.yahoo.com/group/domaindrivendesign/message/17972) around value objects and repositories on the domain driven design yahoo group. In this case it revolves around a the definition of a **Country**.
 
 Firstly, a repository should return an entity; never a value object. Well, so the definition goes. One may want to break that rule but it probably is not necessary. Now the definition of a value object vs. an entity has been rehashed to a point of boredom but another way to look at a value object is a value (albeit a composite value) that _never changes. The date '27 April' _never changes.
 

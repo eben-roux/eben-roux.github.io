@@ -1,4 +1,6 @@
-baseurl: "http://eben-roux.github.io"
+# original ebenroux.co.za A record pointed to 74.86.13.104
+
+baseurl: "http://ebenroux.co.za"
 
 permalink: pretty
 
