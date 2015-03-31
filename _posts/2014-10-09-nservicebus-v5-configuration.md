@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "NServiceBus V5 Configuration"
-date: 2014-10-09 06:41:00
+date: 2014-10-29 06:41:00
 comments: true
 categories:
 - opinion

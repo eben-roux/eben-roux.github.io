@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "ReSharper Open Source"
-date: 2014-10-09 06:41:00
+date: 2014-10-29 06:41:00
 comments: true
 categories:
 - opinion
