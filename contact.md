@@ -12,7 +12,7 @@ layout: page
 
 ### e-mail
 ```
-me@ebenroux.coza
+me@ebenroux.co.za
 ```
 
 ### skype
