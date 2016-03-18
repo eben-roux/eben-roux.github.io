@@ -1,4 +1,6 @@
 # original ebenroux.co.za A record pointed to 74.86.13.104
+gems:
+  - jekyll-redirect-from
 
 baseurl: "http://ebenroux.co.za"
 
