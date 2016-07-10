@@ -142,9 +142,9 @@ Let's give that *hello world* business another go, shall we:
 alert('hello world!');
 ~~~
 
-Well, that escalated quickly!
+Well, that escalated quickly!  Absolutely nothing happens and we have managed to break some pretty fundamental JavaScript functionality.
 
-However, this can come in handy when we really *do* need to swap out some functionality on object.  In the following code we will reproduce the C# code to a certain degree.
+However, this can come in handy when we really *do* need to swap out some functionality on an object.  In the following code we will reproduce the C# code to a certain degree.
 
 ~~~ javascript
 RandomNumberGenerator = function() {
