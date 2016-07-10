@@ -443,4 +443,6 @@ There are two parts to steal:
 - The module loader that is included in your application
 - The bundler (steal-tools) that creates release/production versions of your application and related dependencies
 
+Steal also allows the progressive loading of modules using code at any point.  This is useful when you only determine the module to load at runtime.
+
 You will find all the information you need to use steal on the site and you can get help on [DoneJS forum](http://forums.donejs.com/).
