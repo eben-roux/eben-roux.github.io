@@ -26,7 +26,7 @@ public interface IRandomNumberGenerator
 }
 ~~~    
 
-We could then make use of this abstraction in some class without a care as to how it is going to be implemented:
+We could then make use of this abstraction in some class without worrying too much as to how it is going to be implemented:
 
 ~~~ c#
 public class RandomNumberConsumer : IRandomNumberConsumer
@@ -45,7 +45,7 @@ public class RandomNumberConsumer : IRandomNumberConsumer
 }
 ~~~
 
-We have inverted the dependency by not depending on a specific implementation.  It is possible to have multiple implementations with each working in different ways.  For instance:
+We have inverted the dependency by not depending on a specific implementation.  It is possible to have multiple implementations with each working in a slightly different way.  For instance:
 
 ~~~ c#
 public class DefaultRandomNumberGenerator : IRandomNumberGenerator
@@ -69,7 +69,7 @@ public class DoubleRandomNumberGenerator : IRandomNumberGenerator
 }
 ~~~
 
-Making use of an interface for our dependency inversion also means that we can test by specifying know values that result in a predictable result:
+Making use of an interface for our dependency inversion also means that we can test the interaction by specifying known values that result in a predictable result:
 
 ~~~ c#
 [TestFixture]
@@ -101,7 +101,7 @@ public class RandomNumberConsumerFixture
 }
 ~~~
 
-We could then make use of a depende injection container to map a specific implementation to the required interface.  To make things simpler I have added an `IRandomNumberConsumer` interface as well, even though most DI containers should be able to register concrete types without an interface.  In logical terms we would then register our components in our container as follows:
+We could then make use of a dependency injection container to map a specific implementation to the required interface.  To make things simpler I have added an `IRandomNumberConsumer` interface as well, even though most DI containers should be able to register concrete types without an interface.  In logical terms we would then register our components in our container as follows:
 
 ~~~ c#
 var container = new MyDependencyContainerOfChoice();
@@ -114,15 +114,15 @@ Console.WriteLine(container.GetImplementationOf<IRandomNumberConsumer>().Probabi
 
 The container will see that the `RandomNumberConsumer` implementation of the `IRandomNumberConsumer` requires an instance of `IRandomNumberGenerator` and will locate the type that should be returned and inject it into the `RandomNumberConsumer`.
 
-This, of course, brings us to *how* any required instance is created.  Typically a container has a default *lifestyle* of the instance.  In most cases the container will return a *singleton* so that each request for the implementation will return the same instance.  However, we may instruct the container to act a bit like a *factory* and set the lifestyle to `Transient` in order for the container to return a ***new*** instance of the requested implementation each time we request it.
+This, of course, brings us to *how* any required instance is created.  Typically a container provides a default *lifestyle* for the instance.  In most cases the container will return a *singleton* so that each request for the implementation will return the same instance.  However, we may instruct the container to act a bit like a *factory* and set the lifestyle to `Transient` in order for the container to return a ***new*** instance of the requested implementation each time we request it.
 
-These dependencies can exist in one or more files within one or more dependencies.  When we need a dependency well will simply reference the relevant assembly, either directly or using NuGet.
+These dependencies can exist in one or more files within one or more dependencies.  When we need a dependency we will simply reference the relevant assembly, either directly or using NuGet.
 
 ## Dependencies in JavaScript
 
-*JavaScript does not work like this*.  Is is a dynamically typed language that is weakly typed.
+*JavaScript does not work like this*.  Is is a dynamically typed language that is also weakly typed.
 
-This means that, in essence, there can be *no* dependency inversion.It is not possible to define an abstraction to depend on.  You would imply depend on the implementation and with some luck the implemetation that you selected would implement all the required public interface bits.
+This means that, in essence, there can be *no* dependency inversion.  It is not possible to define an abstraction to depend on.  You would simply depend on the implementation and with some luck the implemetation that you selected would implement all the required public interface bits.
 
 There is a certain elegance in the way JavaScript works in that you can override just about everything.  Execute the following in the console of your browser:
 
@@ -130,7 +130,7 @@ There is a certain elegance in the way JavaScript works in that you can override
 alert('hello world!');
 ~~~
 
-And now this:
+The result is somewhat predictable.  And now this:
 
 ~~~ javascript
 window.alert = function() {}
