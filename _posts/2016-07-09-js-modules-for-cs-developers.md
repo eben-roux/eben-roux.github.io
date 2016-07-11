@@ -17,6 +17,8 @@ JavaScript is a rather odd language and the ecosystem is rather huge, as with th
 
 ## Dependencies in C\#
 
+Although it isn't strictly required to use dependency inversion when dealing with dependencies in C# I thought that I would take this angle to illustrate some more differences between C# and the JavaScript world.
+
 When adhering to the [dependency inverson principle](https://en.wikipedia.org/wiki/Dependency_inversion_principle) of the [SOLID principles](https://en.wikipedia.org/wiki/SOLID_(object-oriented_design)) one would depend on an abstraction.  That abstraction is typically an interface:
 
 ~~~ c#
