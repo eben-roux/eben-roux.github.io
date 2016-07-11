@@ -17,7 +17,7 @@ JavaScript is a rather odd language and the ecosystem is rather huge, as with th
 
 ## Dependencies in C\#
 
-When adhering to [dependency inverson principle](https://en.wikipedia.org/wiki/Dependency_inversion_principle) of the [SOLID principles](https://en.wikipedia.org/wiki/SOLID_(object-oriented_design)) one would depend on an abstraction.  That abstraction is typically an interface:
+When adhering to the [dependency inverson principle](https://en.wikipedia.org/wiki/Dependency_inversion_principle) of the [SOLID principles](https://en.wikipedia.org/wiki/SOLID_(object-oriented_design)) one would depend on an abstraction.  That abstraction is typically an interface:
 
 ~~~ c#
 public interface IRandomNumberGenerator
