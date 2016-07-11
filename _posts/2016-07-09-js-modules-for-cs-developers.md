@@ -191,13 +191,13 @@ mock.next = function() { return 30; };
 assertFalse(consumer.probability());
 ~~~
 
-We can achieve the same outcome in JavaScript that we had in C# but it works in a *very* different way.  There is no dependency injection container though since there is no interface-to-implementation mapping required.  In this way, a dynamic language has no need for a dependency injection container and it doesn't even make sense to have one.
+We can achieve the same outcome in JavaScript that we had in C# but it works in a *very* different way.  There is no dependency injection container since there is no interface-to-implementation mapping required, or even possible.  In this way, a dynamic language has no need for a dependency injection container and it doesn't even make sense to have one.
 
-Howe, we *do* still have dependencies.  There are not assemblies since JavaScript is *interpreted*.  This means that we ever only have source files that we work with.  Therefore, in order to use a dependency we have to use the *source code file* containing the code we wish to make use of.  This is where we end up with a whole host of `<script>` tags.  It is also important that the script tags be ordered correctly to represent the *dependency graph* correctly since we cannot make use of a dependency unless the code for that dependency has been executed in the JavaScript environment.
+However, we *do* still have dependencies.  There are no assemblies since JavaScript is *interpreted*.  This means that we ever only have source files that we work with.  Therefore, in order to use a dependency we have to use the *source code file* containing the code we wish to make use of.  This is where we end up with a whole host of `<script>` tags.  It is also important that the script tags be ordered correctly to represent the *dependency graph* correctly since we cannot make use of a dependency unless the code for that dependency has been executed in the JavaScript environment.
 
 If you have ever done any JavaScript development you will know about the `<script>` tag.  In this article I will use the script tag to synchronously execute external JavaScript by using the `src` attribute.  There are some variations on the use of the `<script>` tag but they are beyond the scope of this article.
 
-Our dependencies are usually added in an `html` file.  Since the scripts are loaded immediately and block any rendering they should be placed at the bottom of the page just before the closing `</body>` tag.  On a side note, we need to add any stylesheets to the top of the page in the `<head>` tag to apply styling to the page while we wait for those `<script>` tags to load:
+Our dependencies are usually added in an `html` file.  Since the scripts are loaded immediately, and block any rendering, they should be placed at the bottom of the page just before the closing `</body>` tag.  On a side note, we need to add any stylesheets to the top of the page in the `<head>` tag to apply styling to the page while we wait for those `<script>` tags to load:
 
 ~~~ html
 <html>
@@ -225,11 +225,11 @@ Our dependencies are usually added in an `html` file.  Since the scripts are loa
 </html>
 ~~~
 
-For many web applications this would be fine since we have a couple of "global" dependencies that we expect to be available in every bit of JavaScript that we execute.  However, eventually we will run into a bit of a nightmare w.r.t. dependency ordering and how one goes about bundling all the files.  In case you are not aware of it: it is faster to download one bigger resource (script, css, image) than many smaller resources.
+For many web applications this would be fine since we have a couple of "global" dependencies that we expect to be available in every bit of JavaScript that we execute.  However, eventually we will run into a nightmare w.r.t. dependency ordering and how one goes about bundling all the files.  In case you are not aware of it: it is faster to download one bigger resource (script, css, image) than many smaller resources.
 
 This means that we are going to need some mechanism to merge all these files we depend on and then minify then into the least number of files possible.  This, in itself, may be somewhat of a challenge.
 
-When dealing with many JavaScript files, such as when on develops a single page application, the number of files can be quite substantial  With Visual Sutdio one can drag a JavaScript file into another and the following *reference* entry will be placed at the top of the file that is referening the other:
+When dealing with many JavaScript files, such as when on develops a single page application, the number of files can be quite substantial.  With Visual Sutdio one can drag a JavaScript file into another and the following *reference* entry will be placed at the top of the file that is referening the other:
 
 ~~~ javascript
 /// <reference path="relative-path-to/this-dependency.js" />
@@ -241,7 +241,7 @@ It is important to note that this `reference` entry is purely informational.  Vi
 
 ## Why use modules?
 
-As we have seen above absolutely all dependencies are globally scoped.  This means that when the files execute something is defined *globally*.  All variables in JavaScript (ES5 / current as at July 2016) are scoped either globally or in a function:
+As we have seen above absolutely all dependencies are globally scoped.  This means that when the files execute something is defined *globally*.  All variables in JavaScript (ES5 / current as at July 2016) are scoped either globally or by function:
 
 ~~~ javascript
 // this declaration...
@@ -251,7 +251,7 @@ var shuttle = {};
 window.shuttle = {};
 ~~~
 
-Anything, therefore, *not* defined in a function gets attached to the global `window` object.  In contrast, anything defined anywhere (yes, anywhere) in a function is scoped to the function:
+Anything, therefore, that is *not* defined in a function gets attached to the global `window` object.  In contrast, anything defined anywhere (yes, anywhere) in a function is scoped to the function:
 
 ~~~ javascript
 window.shuttle = {};
@@ -267,7 +267,7 @@ window.shuttle.sayHello = function(to) {
 }
 ~~~
 
-You may be wondering why this is relevant.  Well, when importing, say, jQuery using a `<script>` tag the library assigns itself to variable `$` which we have seen is now equivalent to `window.$`.  This is where things get interesting when another library decides that it, too, would like to use the `$` variable.  There are ways around this but modules can help us here.
+You may be wondering why this is relevant.  When importing, for example, jQuery using a `<script>` tag the library assigns itself to variable `$` which we have seen is now equivalent to `window.$`.  This is where things get interesting when another library decides that it, too, would like to use the `$` variable.  There is nothing in JavaScript that is going to prevent that.  There are ways around this but modules can help us here since the module, as a whole, is encapsulated.
 
 A JavaScript module is a singleton and is represented by a file.  The module can `import` other modules and `export` functionality in a variety of ways.  This means that our dependencies are still file-based since we have not type information.  The following is an example of importing jquery as a module:
 
@@ -289,9 +289,9 @@ $old('div').css('font-weight', 'bold');
 $new('div').css('font-weight', 'bold');
 ~~~
 
-Now *that* is somewhat simpler than having to use `<script>` tags.  However, you *cannot* use this file directly in a browser without having the code **transpiled**; else you would probably only receive an error since todays browsers do not yet implement this syntax.  A JavaScript transpiler takes source that *is not* pure JavaScript and changes it *to be* pure JavaScript.
+I am using the two jquery version as an example since the chances of *actually* requiring both version in a real system is rather slim.  However, it *does* demonstrate that it is somewhat simpler than having to use `<script>` tags.  You cannot use this file directly in a browser without having the code **transpiled**; else you would probably receive an error since todays browsers do not yet implement this syntax.  A JavaScript transpiler takes source that *is not* pure JavaScript and changes it *to be* pure JavaScript.
 
-Logically (implementations are going to vary), a transpiler may take the above code and inspect it for import statements.  It will find the `import $old from 'jquery-1.8';` bit and check an internal registry in the for of a hash for the `jquery-1.8` identifier and return it or, if necessary, first load it:
+Logically (implementations are going to vary), a transpiler may take the above code and inspect it for import statements.  It will find the `import $old from 'jquery-1.8';` code and check an internal registry hash for the `jquery-1.8` identifier and return the module or, if necessary, first load it:
 
 ~~~ javascript
 if (!window.MODULES['jquery-1.8']) {
@@ -311,7 +311,7 @@ $old('div').css('font-weight', 'bold');
 $new('div').css('font-weight', 'bold');
 ~~~
 
-The beauty of this is that the above JavaScript would be in a function as well.  This means that the variable are locally scoped to the function and do not *polute* the global (window) namespace.
+The beauty of this is that the above JavaScript would be in a function as well.  This means that the variables are locally scoped to the function and do not *pollute* the global (window) namespace.
 
 ### Module dependencies
 
@@ -353,7 +353,7 @@ var b = {
 export default b;
 ~~~
 
-Now, another quick point to remember is that each module that requires another should import that module since, even though modules are singletons, they are *no longer global*.  You have to assign it to a variable and, being singular, they are only loaded once.
+Another quick point to remember is that each module that requires another should import that module since, even though modules are singletons, they are *no longer global*.  You have to assign it to a variable and, being singletons, they are only loaded once.
 
 From the above it is rather easy, given the correct tooling, to build a dependency graph and then merge and minify the files.
 
@@ -361,7 +361,7 @@ From the above it is rather easy, given the correct tooling, to build a dependen
 
 If you are *au fait* with node/npm you can skip this section.
 
-There has been a major shift for web development tooling to [Node.js](https://nodejs.org/en/) along with the [npmjs](https://www.npmjs.com/).  Npm is a package manage for node and JavaScript.  It can be somewhat odd to use npm for front-end JavaScript as all the code is stored in a sub-folder called `node_modules`.  However, not all module *are* node.js modules but packages targeting the tooling side of things most certainly are node modules.  The node and browser JavaScript files are, therefore, mingled.  This can take some getting used to.
+There has been a major shift for web development tooling to [Node.js](https://nodejs.org/en/) along with the [npmjs](https://www.npmjs.com/).  It probably makes sense given that node is cross platform.  Npm is a package manager for node and JavaScript.  It can be somewhat odd to use npm for front-end JavaScript as all the code is stored in a sub-folder called `node_modules`.  However, not all modules *are* node.js modules but packages targeting the tooling side of things most certainly are node modules.  The node and browser JavaScript files are, therefore, mingled.  This can take some getting used to.
 
 Npm is somewhat like NuGet and, as such, needs some place to store the package dependencies.  When using NuGet the dependencies are stored in the `packages.config` file and it has the following structure:
 
@@ -395,7 +395,7 @@ You can get this basic structure by executing the following in a console and jus
 npm init
 ~~~
 
-You will realise that there is more to this structure than just dependencies.  Let's add a dependency by running the following in a console:
+You will realise that there is more to this structure than just dependencies.  Let's add dependencies by running the following in a console:
 
 ~~~ console
 npm install steal --save
@@ -436,7 +436,7 @@ This brings me to [StealJS](http://stealjs.com/):
 
 > Futuristic JavaScript dependency loader and builder. Speeds up application load times. Works with ES6, CommonJS, AMD, CSS, LESS and more. Simplifies modular workflows.
 
-As you can tell from the above, StealJS enables loading modules that have been imlemented using a variety of approaches.  I would suggest using the EcmaScript 6 module format for any future developement.
+As you can tell from the above, StealJS enables loading modules that have been implemented using a variety of approaches.  I would suggest using the EcmaScript 6 module format for any future development.
 
 There are two parts to steal:
 
