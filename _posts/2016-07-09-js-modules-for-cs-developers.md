@@ -13,7 +13,7 @@ tags:
 
 I have decided to make use of [DoneJS](https://donejs.com/) for my web development.  In turn, DoneJS makes use of a host of other technologies.  The one that drew me to this environment was [CanJS](https://canjs.com/) as I had spent some 3 years using [Ember.js](http://emberjs.com/) whilst working for a former employer and I didn't quite like it.  After some investigation I decided on *CanJS* and that led me to *DoneJS*.
 
-JavaScript is a rather odd language and the ecosystem is rather huge, as with the .Net environment.  There are just *so* many choices.  As a result I have largely ignored anything that did not directly relate to my work.  As such I ended up missing the entire JavaScript ***module*** train.  In the upcoming EcmaScript 6 [JavaScript Modules](http://exploringjs.com/es6/ch_modules.html) are pretty well defined.  Now, if you are familiar with JavaScript modules you may as well ignore this post.
+JavaScript is a rather odd language and the ecosystem is rather huge, as with the .Net environment.  There are just *so* many choices.  As a result I have largely ignored anything that did not directly relate to my work.  As such I ended up missing the entire JavaScript ***module*** train.  In the upcoming EcmaScript 6 [JavaScript Modules](http://exploringjs.com/es6/ch_modules.html) are pretty well defined.  Now, if you are familiar with JavaScript modules you may as well ignore this post.  If you need some background reading you can read [this in-depth article](http://www.adequatelygood.com/JavaScript-Module-Pattern-In-Depth.html).
 
 ## Dependencies in C\#
 
