@@ -430,7 +430,7 @@ The `--save` argument tells npm to add the dependency to the `dependencies` hash
 
 The main thing to understand is that the `package.json` does *more* than just track dependencies.  However, when someone else checks out your repository and runs `npm install` the `package.json` file will be used to download the requisite packages.
 
-**Note to Windows users**: the `node_modules` folder can become *very* deep and you will undoubtedly run into path length errors at some stage when using node/npm.  There is a node package called [flatten-packages](https://www.npmjs.com/package/flatten-packages) that will sort you out.
+**Note to Windows users**: the `node_modules` folder can become *very* deep and you may run into path length errors at some stage when using node/npm.  There is a node package called [flatten-packages](https://www.npmjs.com/package/flatten-packages) that will sort you out.  [update]: I have been informed by Matthew Phillips from Bitovi that the long file name issue has been resolved in npm version 3, and that npm version 3 comes with node version 5.
 
 ## StealJS
 
