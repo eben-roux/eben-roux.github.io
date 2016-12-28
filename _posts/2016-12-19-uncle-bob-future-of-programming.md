@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "The 'future' of programming"
-date: 2016-07-09 12:00:00
+date: 2016-12-19 12:00:00
 comments: false
 categories:
 - general
