@@ -2,6 +2,7 @@
 layout: default
 title: Eben Roux
 ---
+{% if page.url == "/" %}
 {% for post in site.posts limit:5 %}
 <div class='row'>
   <div class='col-md-12'>
@@ -14,6 +15,7 @@ title: Eben Roux
 </div>
 <hr/>
 {% endfor %}
+{% endif %}
 {% for post in paginator.posts offset:5 %}
 <div class='row'>
   <div class='col-md-12'>
