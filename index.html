@@ -2,8 +2,10 @@
 layout: default
 title: Eben Roux
 ---
+{% assign full_posts = 0 %}
 {% if page.url == "/" %}
-{% for post in site.posts limit:5 %}
+{% assign full_posts = 5 %}
+{% for post in site.posts limit:full_posts %}
 <div class='row'>
   <div class='col-md-12'>
     <h1>{{ post.title }}</h1>
@@ -16,7 +18,8 @@ title: Eben Roux
 <hr/>
 {% endfor %}
 {% endif %}
-{% for post in paginator.posts offset:5 %}
+{{ full_posts }} <-- full posts
+{% for post in paginator.posts offset:full_posts %}
 <div class='row'>
   <div class='col-md-12'>
     <h2>{{ post.title }}</h2>

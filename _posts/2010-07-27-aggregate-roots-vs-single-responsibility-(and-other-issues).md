@@ -12,7 +12,7 @@ It is interesting to note how many questions there are around Aggregate Roots. E
 
 > "Cluster ENTITIES and VALUE OBJECTS into AGGREGATES and define boundaries around each. Choose one ENTITY to be the root of the AGGREGATE, and control all access to the objects inside the boundary through the root." (Evans, p. 129)
 
-In one of Eric's presentations he touches on this; stating the difference between an Aggregate and an Aggregate Root. I have mentioned Eric's bunch of grapes example in a [previous post]({{ site.baseurl }}/domain-driven%20design/2009/11/23/ddd-%213d-ar/) so I will not re-hash it here.
+In one of Eric's presentations he touches on this; stating the difference between an Aggregate and an Aggregate Root. I have mentioned Eric's bunch of grapes example in a [previous post]({{ site.baseurl }}/domain-driven%20design/2009/11/24/ddd-!3d-ar/) so I will not re-hash it here.
 
 The gang of four has two principles of object-oriented design:
 
@@ -41,7 +41,7 @@ This is where issues start creeping into the design. The maintenance management 
 
 The particular Car is the same car in the real world. Just look at the registration number. However, the context within which it is used changes. It is, in OO terms, a specialization of a Car class to incorporate the context. This inevitably leads to data duplication of sorts since the data for each BC will probably be stored in different databases.
 
-Assuming we view this as a problem, how could we solve this? As proposed by the GoF we could try composition. In DCI terms the context can aggregate the different entities. I previously blogged about an [previous post]({{ aneamic use-case model }}/domain-driven%20design/2009/11/23/ddd-%213d-ar/) and the context looks an awful lot like a use-case. I have not played around with how to get these concepts into code but we'll get there.
+Assuming we view this as a problem, how could we solve this? As proposed by the GoF we could try composition. In DCI terms the context can aggregate the different entities. I previously blogged about an [aneamic use-case model]({{ site.baseurl }}/domain-driven%20design/2009/11/24/ddd-!3d-ar/) and the context looks an awful lot like a use-case. I have not played around with how to get these concepts into code but we'll get there.
 
 ### Repositories return Aggregate Roots?
 
